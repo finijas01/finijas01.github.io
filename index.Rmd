@@ -37,3 +37,7 @@ I also made a bonus [extra page](extra_page.html)
 Some notes:
 
 Google"github domain name cheap."
+
+## New Section!!
+
+[Here's](plotly.html) a page with plotly plots

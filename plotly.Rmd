@@ -29,11 +29,22 @@ nyc_airbnb =
   select(
     borough = neighbourhood_group, neighbourhood, price, room_type, lat, long, rating) %>% 
   filter(
-    borough == "Manhattan",
+    borough == "Manhattan", #borough鎮
     room_type == "Entire home/apt",
     price %in% 100:500
   ) %>% 
   drop_na(rating)
+
+#nyc_airbnb = 
+  #nyc_airbnb %>% 
+  #mutate(rating = review_scores_location / 2) %>%
+  #select(
+    #neighbourhood_group, neighbourhood, rating, price, room_type, lat, long) %>%
+  #filter(
+    #!is.na(rating), 
+    #neighbourhood_group == "Manhattan",
+    #room_type == "Entire home/apt",
+    #price %in% 100:500)
 ```
 
 Let's make a scatterplot!!
@@ -47,7 +58,20 @@ nyc_airbnb %>%
     x = ~lat, y = ~long, color = ~price, #X comes from the variable "lat"
     type = "scatter", mode = "markers", alpha = .5, text = ~text_label
   )
+
+#latitue緯度, longtitude經度
+#lines produces the same kind of plot as ggplot::geom_line
 ```
+
+
+```{r}
+nyc_airbnb %>%
+  mutate(text_label = str_c("Price: $", price, "\nRating: ", rating)) %>% 
+  plot_ly(
+    x = ~lat, y = ~long, type = "scatter", mode = "markers",
+    color = ~price, text = ~text_label, alpha = 0.5)
+```
+
 
 Can we make boxplots? Sure can!
 
@@ -66,8 +90,8 @@ nyc_airbnb %>%
   count(neighbourhood) %>% 
   mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>%
   plot_ly(
-    x = ~neighbourhood, y = ~n, 
-    type = "bar")
+    x = ~neighbourhood, y = ~n, color = ~neighbourhood,
+    type = "bar", colors = "viridis")
 ```
 
 *plotly.com
@@ -80,9 +104,23 @@ nyc_airbnb %>%
 ggp_scatterplot = 
   nyc_airbnb %>% 
   ggplot(aes(x = lat, y = long, color = price)) +
-  geom_point()
+  geom_point(alpha = 0.25) +
+  coord_cartesian()
 
 ggplotly(ggp_scatterplot)
+```
+
+Create a boxplot
+
+```{r}
+box_ggplot = 
+  nyc_airbnb %>% 
+  mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>% 
+  ggplot(aes(x = neighbourhood, y = price, fill = neighbourhood)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+ggplotly(box_ggplot)
 ```
 
 

@@ -16,6 +16,8 @@ Here's some text. I like the internet. I use [google](https://www.google.com/) a
 This is my cat ted, who likes to be on the internet.
 ![](images/images.jfif)
 
+<img src="images/images.jfif" style="width:25%">
+
 ```{r}
 library(tidyverse)
 
@@ -28,3 +30,8 @@ Here's a direct link to the about page:
 [about](about.html)
 
 I also made a bonus [extra page](extra_page.html)
+
+
+Some notes:
+
+Google"github domain name cheap."

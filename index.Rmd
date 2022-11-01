@@ -16,7 +16,9 @@ Here's some text. I like the internet. I use [google](https://www.google.com/) a
 This is my cat ted, who likes to be on the internet.
 ![](images/images.jfif)
 
+<center>
 <img src="images/images.jfif" style="width:25%">
+</center>
 
 ```{r}
 library(tidyverse)
